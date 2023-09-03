@@ -20,7 +20,5 @@ public class Line{
 	public String toString(){
 		String toString = String.format("%10s (%.3f, %.3f) - (%.3f, %.3f) has a length of ", color, x1, y1, x2, y2) + length();
 		return toString;
-//		return color + " (" + x1 + ", " + y1 + ") - (" + x2 + ", " +
-//			y2 + ") has a length of " + length();
 	}
 }
