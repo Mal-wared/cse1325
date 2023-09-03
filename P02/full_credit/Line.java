@@ -14,11 +14,13 @@ public class Line{
 	}
 
 	public double length(){
-		return Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
+		return Math.sqrt(Math.pow(x1-x2,2) + Math.pow(y1-y2,2));
 	}
 
 	public String toString(){
-		return color + " (" + x1 + ", " + y1 + ") - (" + x2 + ", " +
-			y2 + " )";
+		String toString = String.format("%10s (%.3f, %.3f) - (%.3f, %.3f) has a length of ", color, x1, y1, x2, y2) + length();
+		return toString;
+//		return color + " (" + x1 + ", " + y1 + ") - (" + x2 + ", " +
+//			y2 + ") has a length of " + length();
 	}
 }
