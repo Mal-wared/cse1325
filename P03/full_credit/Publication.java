@@ -14,17 +14,21 @@ public class Publication{
 		this.copyright = copyright;
 	}
 	
-	public checkOut(String patron){
+	public void checkOut(String patron){
 		loanedTo = patron;
-		LocalDate today = LocalDate.now();
-		dueDate = today.plusDays(14);
+		dueDate = LocalDate.now().plusDays(14);
 	}
 	
-	public checkIn(){
-	
-	}
-	
-	public String toString(){
+	public void checkIn(){
 		
+	}
+	
+	@Override
+	public String toString(){
+		String loanStatus;
+		if(!loanedTo.equals(NULL)){
+			loanStatus = String.format("    --> loaned to %s ", loanedTo);
+		}
+		String toString = String.format("%s's \"%s\", copyright %d\n%s", author, title, copyright, loanStatus);
 	}
 }
