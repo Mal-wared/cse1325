@@ -1,12 +1,14 @@
+import java.util.ArrayList;
+
 public class Library{
 	private String name;
-	private ArrayList<Publication> publications;
+	private ArrayList<Publication> publications = new ArrayList<>();
 	
 	public Library(String name){
 		this.name = name;
 	}
 	
-	public addPublication(Publication publication){
+	public void addPublication(Publication publication){
 		publications.add(publication);
 	}
 	
@@ -16,6 +18,12 @@ public class Library{
 	}
 	
 	public String toString(){
-		return name;
+		StringBuilder toString = new StringBuilder();
+		toString.append(String.format("%s\n\n", name));
+		for(int i = 0; i < publications.size(); i++){
+			toString.append(String.format("%d) %s", i, publications.get(i).toString()));
+		}
+	
+		return toString.toString();
 	}
 }
