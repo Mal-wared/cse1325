@@ -1,6 +1,11 @@
+package mdi;
+
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import library.Library;
+import library.Publication;
+import library.Patron;
 
 public class LibraryManager{
 	public static void main(String args[]){
