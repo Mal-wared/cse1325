@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import library.Library;
 import library.Publication;
 import library.Patron;
+import library.Video;
 
 public class LibraryManager{
 	public static void main(String args[]){
@@ -27,11 +28,19 @@ public class LibraryManager{
 				else if(!patronsSectionReached){
 					String title = parts[0].trim();
 					String author = parts[1].trim();
+					int copyright = Integer.parseInt(parts[2].trim());
 					try{
-						int copyright = Integer.parseInt(parts[2].trim());
+						if(parts.length == 3){
+							Publication newPub = new Publication(title, author, copyright);
+							library.addPublication(newPub);
+						}
+						else if(parts.length == 4){
+							int runtime = Integer.parseInt(parts[3].trim());
+							
+							Video newPub = new Video(title, author, copyright, runtime);
+							library.addPublication(newPub);
+						}
 						
-						Publication newPub = new Publication(title, author, copyright);
-						library.addPublication(newPub);
 					}catch(NumberFormatException e){
 						System.err.println("Error parsing copyright for line: " + line);
 					}

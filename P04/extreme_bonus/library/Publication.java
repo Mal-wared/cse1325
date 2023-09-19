@@ -27,18 +27,34 @@ public class Publication{
 		
 	}
 	
-	@Override
-	public String toString(){
+	protected String toStringBuilder(String pre, String mid){
 		String loanStatus = new String();
 		String toString = new String();
 		if(loanedTo != null){
-			loanStatus = String.format("    --> loaned to %s until %s\n", loanedTo, dueDate.toString());
-			toString = String.format("%s's \"%s\", copyright %d\n%s", author, title, copyright, loanStatus);
+			if(pre.equals("Book")){
+				loanStatus = String.format("    --> loaned to %s until %s\n", loanedTo, dueDate.toString());
+				toString = String.format("Book %s's \"%s\", copyright %d\n%s", author, title, copyright, loanStatus);
+			}
+			else if(pre.equals("Video")){
+				loanStatus = String.format("    --> loaned to %s until %s\n", loanedTo, dueDate.toString());
+				toString = String.format("Video %s's \"%s\", copyright %d, runtime %d\n%s", author, title, copyright, Integer.parseInt(mid), loanStatus);
+			}
+			
 		}
 		else{
-			toString = String.format("%s's \"%s\", copyright %d\n", author, title, copyright);
+			if(pre.equals("Book")){
+				toString = String.format("Book %s's \"%s\", copyright %d\n", author, title, copyright);
+			}
+			else if(pre.equals("Video")){
+				toString = String.format("Video %s's \"%s\", copyright %d, runtime %d\n", author, title, copyright, Integer.parseInt(mid));
+			}
 		}
 		
 		return toString;
+	}
+	
+	@Override
+	public String toString(){		
+		return toStringBuilder("Book", "");
 	}
 }
