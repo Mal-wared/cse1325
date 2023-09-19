@@ -1,3 +1,7 @@
+package library;
+
+import java.util.ArrayList;
+
 /**
   * Models a library containing various publications.
   * 
@@ -6,11 +10,6 @@
   * @since              1.0
   * @license.agreement  Gnu General Public License 3.0
   */
-
-package library;
-
-import java.util.ArrayList;
-
 public class Library{
 	private String name;
 	private ArrayList<Publication> publications = new ArrayList<>();
@@ -49,7 +48,8 @@ public class Library{
 	/**
 	  * Generates the list of patrons
 	  * 
-	  * @since          1.0
+	  * @return   returns the list of patrons 
+	  * @since    1.0
 	  */
 	public String patronMenu(){
 		StringBuilder patMenu = new StringBuilder();
@@ -63,7 +63,9 @@ public class Library{
 	/**
 	  * Checks out a publication from the list of publications to a specific patron
 	  * 
-	  * @since   1.0
+	  * @param publicationIndex   the index of the intended publication to checkout
+	  * @param patronIndex        the index of the intended patron that checks out
+	  * @since                    1.0
 	  */
 	public void checkOut(int publicationIndex, int patronIndex){
 		publications.get(publicationIndex).checkOut(patrons.get(patronIndex));

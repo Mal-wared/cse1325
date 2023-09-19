@@ -1,3 +1,7 @@
+package library;
+
+import java.time.LocalDate;
+
 /**
   * A library resource that can be checked out by a patron.
   * 
@@ -6,11 +10,6 @@
   * @since              1.0
   * @license.agreement  Gnu General Public License 3.0
   */
-
-package library;
-
-import java.time.LocalDate;
-
 public class Publication{
 	private String title;
 	private String author;
@@ -56,6 +55,14 @@ public class Publication{
 		
 	}
 	
+	/**
+	  * Creates a string depending on whether or not the publication is a book or video
+	  * 
+	  * @param pre   the input determining if the publication is a book or video
+	  * @param mid   the runtime of the publication in minutes (given the publication is a video)
+	  * @return      returns a string depending on the input of parameter pre
+	  * @since       1.0
+	  */
 	protected String toStringBuilder(String pre, String mid){
 		String loanStatus = new String();
 		String toString = new String();

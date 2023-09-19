@@ -1,3 +1,5 @@
+package library;
+
 /**
   * A person authorized to check out a library resource.
   * 
@@ -6,9 +8,6 @@
   * @since              1.0
   * @license.agreement  Gnu General Public License 3.0
   */
-
-package library;
-
 public class Patron{
 	private String name;
 	private String email;
