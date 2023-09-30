@@ -1,6 +1,9 @@
 package library;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
   * Models a library containing various publications.
@@ -70,6 +73,66 @@ public class Library{
 	public void checkOut(int publicationIndex, int patronIndex){
 		publications.get(publicationIndex).checkOut(patrons.get(patronIndex));
 		
+	}
+	
+	public String toMenu(){
+		StringBuilder menu = new StringBuilder();
+		menu.append("1) Load Library from File\n");
+		menu.append("2) List Publications and Videos\n");
+		menu.append("3) Add New Publication\n");
+		menu.append("4) Add New Video\n");
+		menu.append("5) Add New Patron\n");
+		menu.append("6) List Patrons\n");
+		menu.append("7) Check Out Publication or Video\n");
+		menu.append("8) Check In Publication or Video\n");
+		return menu.toString();
+	}
+	
+	public void readFile(String fileName){
+		try{
+			Scanner fileScanner = new Scanner(new File(fileName));
+			boolean patronsSectionReached = false;
+			
+			while(fileScanner.hasNextLine()){
+				String line = fileScanner.nextLine().trim();
+				String[] parts = line.split(",");
+				
+				if(parts[0].equals("Patrons")){
+					patronsSectionReached = true;
+				}
+				else if(!patronsSectionReached){
+					String title = parts[0].trim();
+					String author = parts[1].trim();
+					int copyright = Integer.parseInt(parts[2].trim());
+					try{
+						if(parts.length == 3){
+							Publication newPub = new Publication(title, author, copyright);
+							addPublication(newPub);
+						}
+						else if(parts.length == 4){
+							int runtime = Integer.parseInt(parts[3].trim());
+							
+							Video newPub = new Video(title, author, copyright, runtime);
+							addPublication(newPub);
+						}
+						
+					}catch(NumberFormatException e){
+						System.err.println("Error parsing copyright for line: " + line);
+					}
+					
+				}
+				else{
+					String name = parts[0].trim();
+					String email = parts[1].trim();
+					
+					Patron newPat = new Patron(name, email);
+					addPatron(newPat);
+				}
+				
+			}
+		}catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
 	}
 	
 	/**
