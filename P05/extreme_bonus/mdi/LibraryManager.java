@@ -10,23 +10,9 @@ public class LibraryManager{
 	public static void main(String args[]){
 		// Instancing a new library
 		Library library = new Library("UTA Bookstore");
-	
-		// Instancing new scanner to utilize
-		library.readFile("library.txt");
-		
-	
-		// Printing out the contents of the library
-		System.out.println(library.toString());
 		
 		// Utilizing scanners to ask the user their information
 		Scanner scanner = new Scanner(System.in);
-		
-		
-		
-		// Checking out the publication (book) for the user while checking for valid inputs
-		
-		
-		System.out.println(library.toString());
 		
 		boolean quit = false;
 		while(!quit){
@@ -42,17 +28,37 @@ public class LibraryManager{
 				library.toString();
 			} 
 			else if(cmdInput.equals("3")){
-				
-				library.addPublication();
+				System.out.println("Enter New Publication's Title: ");
+				String title = scanner.nextLine();
+				System.out.println("Enter New Publication's Author: ");
+				String author = scanner.nextLine();
+				System.out.println("Enter New Publication's Copyright: ");
+				int copyright = Integer.parseInt(scanner.nextLine());
+				Publication newPub = new Publication(title, author, copyright);
+				library.addPublication(newPub);
+				result.append(String.format("Added publication %s", newPub.toString()));
 			} 
 			else if(cmdInput.equals("4")){
-			
-			
-				library.addPublication();
+				System.out.println("Enter New Publication's Title: ");
+				String title = scanner.nextLine();
+				System.out.println("Enter New Publication's Author: ");
+				String author = scanner.nextLine();
+				System.out.println("Enter New Publication's Copyright: ");
+				int copyright = Integer.parseInt(scanner.nextLine());
+				System.out.println("Enter New Publication's Runtime: ");
+				int runtime = Integer.parseInt(scanner.nextLine());
+				Video newVid = new Publication(title, author, copyright, runtime);
+				library.addPublication(newVid);
+				result.append(String.format("Added video %s", newVid.toString()));
 			} 
 			else if(cmdInput.equals("5")){
-				
-				library.addPatron();
+				System.out.println("Enter New Patron's Name: ");
+				String name = scanner.nextLine();
+				System.out.println("Enter New Patron's E-mail: ");
+				String email = scanner.nextLine();
+				Patron newPat = new Patron(name, email);
+				library.addPatron(newPat);
+				System.out.println(String.format("Added patron %s", newPat.toString()));
 			} 
 			else if(cmdInput.equals("6")){
 				library.patronMenu();
@@ -77,13 +83,14 @@ public class LibraryManager{
 			else if(cmdInput.equals("8")){
 				
 			}
-			else{
-			
+			else if(cmdInput.equals("9")){
+				quit = true;
 			}
-			
+			else{
+				result.append("Invalid input, try another command");
+			}
+	
 			System.out.println(result.toString());
-			
-			
 		}
 	}
 }
