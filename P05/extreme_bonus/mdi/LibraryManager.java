@@ -20,12 +20,13 @@ public class LibraryManager{
 			String cmdInput = scanner.nextLine();
 			StringBuilder result = new StringBuilder();                
 			if(cmdInput.equals("1")){
+				System.out.println("Enter File Name to Read: ");
 				String fileName = scanner.nextLine();
 				library.readFile(fileName);
-				result.append(String.format("Read file \"%s\"", fileName));
+				result.append(String.format("Read file \"%s\"\n", fileName));
 			} 
 			else if(cmdInput.equals("2")){
-				library.toString();
+				System.out.println(library.toString());
 			} 
 			else if(cmdInput.equals("3")){
 				System.out.println("Enter New Publication's Title: ");
@@ -47,7 +48,7 @@ public class LibraryManager{
 				int copyright = Integer.parseInt(scanner.nextLine());
 				System.out.println("Enter New Publication's Runtime: ");
 				int runtime = Integer.parseInt(scanner.nextLine());
-				Video newVid = new Publication(title, author, copyright, runtime);
+				Video newVid = new Video(title, author, copyright, runtime);
 				library.addPublication(newVid);
 				result.append(String.format("Added video %s", newVid.toString()));
 			} 
@@ -61,9 +62,10 @@ public class LibraryManager{
 				System.out.println(String.format("Added patron %s", newPat.toString()));
 			} 
 			else if(cmdInput.equals("6")){
-				library.patronMenu();
+				System.out.println(library.patronMenu());
 			} 
 			else if(cmdInput.equals("7")){
+				System.out.println(library.toString());
 				System.out.println("Which book would you like to check out? ");
 				String bookIndex = scanner.nextLine();
 		

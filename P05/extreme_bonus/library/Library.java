@@ -85,6 +85,7 @@ public class Library{
 		menu.append("6) List Patrons\n");
 		menu.append("7) Check Out Publication or Video\n");
 		menu.append("8) Check In Publication or Video\n");
+		menu.append("9) Exit program\n");
 		return menu.toString();
 	}
 	
