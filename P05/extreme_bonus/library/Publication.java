@@ -47,7 +47,7 @@ public class Publication{
 	}
 	
 	/**
-	  * N/a
+	  * Checks in a publication from a patron and sets its due date to null
 	  * 
 	  * @since          1.0
 	  */

@@ -74,10 +74,21 @@ public class Library{
 		publications.get(publicationIndex).checkOut(patrons.get(patronIndex));
 	}
 	
+	/**
+	  * Checks in a publication from the list of publications from a patron
+	  * 
+	  * @param publicationIndex   the index of the intended publication to checkin
+	  * @since                    1.0
+	  */
 	public void checkIn(int publicationIndex){
 		publications.get(publicationIndex).checkIn();
 	}
 	
+	/**
+	  * Generates the list of command options, a.k.a. the menu
+	  * 
+	  * @since          1.0
+	  */
 	public String toMenu(){
 		StringBuilder menu = new StringBuilder();
 		menu.append("1) Load Library from File\n");
@@ -92,6 +103,12 @@ public class Library{
 		return menu.toString();
 	}
 	
+	/**
+	  * Reads in a file's values to the intended library
+	  * 
+	  * @param fileName	  the name of the file to be read
+	  * @since            1.0
+	  */
 	public void readFile(String fileName){
 		try{
 			Scanner fileScanner = new Scanner(new File(fileName));
@@ -119,11 +136,10 @@ public class Library{
 							Video newPub = new Video(title, author, copyright, runtime);
 							addPublication(newPub);
 						}
-						
-					}catch(NumberFormatException e){
+					}
+					catch(NumberFormatException e){
 						System.err.println("Error parsing copyright for line: " + line);
 					}
-					
 				}
 				else{
 					String name = parts[0].trim();
@@ -132,9 +148,9 @@ public class Library{
 					Patron newPat = new Patron(name, email);
 					addPatron(newPat);
 				}
-				
 			}
-		}catch(FileNotFoundException e){
+		}
+		catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
 	}
