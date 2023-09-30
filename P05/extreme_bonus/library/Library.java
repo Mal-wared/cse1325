@@ -72,7 +72,10 @@ public class Library{
 	  */
 	public void checkOut(int publicationIndex, int patronIndex){
 		publications.get(publicationIndex).checkOut(patrons.get(patronIndex));
-		
+	}
+	
+	public void checkIn(int publicationIndex){
+		publications.get(publicationIndex).checkIn();
 	}
 	
 	public String toMenu(){

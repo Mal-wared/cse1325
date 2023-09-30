@@ -23,7 +23,7 @@ public class LibraryManager{
 				System.out.println("Enter File Name to Read: ");
 				String fileName = scanner.nextLine();
 				library.readFile(fileName);
-				result.append(String.format("Read file \"%s\"\n", fileName));
+				result.append(String.format("\nRead file \"%s\"\n", fileName));
 			} 
 			else if(cmdInput.equals("2")){
 				System.out.println(library.toString());
@@ -37,7 +37,7 @@ public class LibraryManager{
 				int copyright = Integer.parseInt(scanner.nextLine());
 				Publication newPub = new Publication(title, author, copyright);
 				library.addPublication(newPub);
-				result.append(String.format("Added publication %s", newPub.toString()));
+				result.append(String.format("\nAdded publication %s", newPub.toString()));
 			} 
 			else if(cmdInput.equals("4")){
 				System.out.println("Enter New Publication's Title: ");
@@ -50,7 +50,7 @@ public class LibraryManager{
 				int runtime = Integer.parseInt(scanner.nextLine());
 				Video newVid = new Video(title, author, copyright, runtime);
 				library.addPublication(newVid);
-				result.append(String.format("Added video %s", newVid.toString()));
+				result.append(String.format("\nAdded video %s", newVid.toString()));
 			} 
 			else if(cmdInput.equals("5")){
 				System.out.println("Enter New Patron's Name: ");
@@ -59,7 +59,7 @@ public class LibraryManager{
 				String email = scanner.nextLine();
 				Patron newPat = new Patron(name, email);
 				library.addPatron(newPat);
-				System.out.println(String.format("Added patron %s", newPat.toString()));
+				System.out.println(String.format("\nAdded patron %s", newPat.toString()));
 			} 
 			else if(cmdInput.equals("6")){
 				System.out.println(library.patronMenu());
@@ -83,6 +83,20 @@ public class LibraryManager{
 				}
 			} 
 			else if(cmdInput.equals("8")){
+				System.out.println(library.toString());
+				System.out.println("Which book would you like to check in? ");
+				String bookIndex = scanner.nextLine();
+		
+				System.out.println(library.patronMenu());
+				
+				try{
+					library.checkIn(Integer.valueOf(bookIndex));
+				} catch(IndexOutOfBoundsException e){
+					System.err.println(String.format("IndexOutOfBoundsException thrown: Invalid book index input \"%s\"", bookIndex));
+				} catch(NumberFormatException e){
+					System.err.println(String.format("NumberFormatException thrown: Invalid book index input \"%s\"", bookIndex));
+				}
+				
 				
 			}
 			else if(cmdInput.equals("9")){

@@ -52,7 +52,8 @@ public class Publication{
 	  * @since          1.0
 	  */
 	public void checkIn(){
-		
+		loanedTo = null;
+		dueDate = null;
 	}
 	
 	/**
