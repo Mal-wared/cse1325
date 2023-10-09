@@ -1,4 +1,8 @@
-stop
-sto,p,2000,checked out,add,me,2023-10-23,200,
+PlayerScoth
+Popcorn,Poppers,2004,checked out,SMOSH,smosh@business.com,2023-10-23,
+Some Video In 2019,PewDiePie,2019,checked out,PewDiePie,pewdiepie@gmail.com,2023-10-23,15,
+Popcorn Time,Kristal Meth,2004,checked in,
 Patrons
-add,me,
+PewDiePie,pewdiepie@gmail.com,
+SMOSH,smosh@business.com,
+Newest patron,Patron@patron.com,

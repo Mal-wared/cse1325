@@ -85,6 +85,10 @@ public class Publication{
 		dueDate = LocalDate.now().plusDays(14);
 	}
 	
+	public void loadDate(String dueDateString){
+		dueDate = LocalDate.parse(dueDateString);
+	}
+	
 	/**
 	  * Checks in a publication from a patron and sets its due date to null
 	  * 

@@ -46,7 +46,7 @@ public class LibraryManager{
 				addPatron(library, scanner);
 			} 
 			else if(cmdInput.equals("8")){
-				openLibrary(library, scanner);
+				library = openLibrary(library, scanner);
 			}
 			else if(cmdInput.equals("9")){
 				System.out.print("Enter File Name to Read: ");
@@ -67,20 +67,20 @@ public class LibraryManager{
 		}
 	}
 	
-	public static void openLibrary(Library library, Scanner scanner){
+	public static Library openLibrary(Library library, Scanner scanner){
 		System.out.print("Enter File Name to Read: ");
 		String fileName = scanner.nextLine();
-		library = new Library(fileName);
 		System.out.println(String.format("\nOpened library from \"%s\"\n", fileName));
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
-			name = br.readLine().trim();
+			String libraryName = br.readLine().trim();
+			Library updatedLibrary = new Library(libraryName);
 			boolean patronsSectionReached = false;
+			String line;
 			
-			while(fileScanner.readLine() != null){
-				String line = br.readLine().trim();
+			
+			while((line = br.readLine()) != null){
 				String[] parts = line.split(",");
-				
 				if(parts[0].equals("Patrons")){
 					patronsSectionReached = true;
 				}
@@ -92,21 +92,24 @@ public class LibraryManager{
 					try{
 						if(parts.length == 4){
 							Publication newPub = new Publication(title, author, copyright);
-							library.addPublication(newPub);
+							updatedLibrary.addPublication(newPub);
 						}
 						else if(parts.length == 5){
 							int runtime = Integer.parseInt(parts[4].trim());
 							
 							Video newPub = new Video(title, author, copyright, runtime);
-							library.addPublication(newPub);
+							updatedLibrary.addPublication(newPub);
 						}
 						else if(parts.length == 7){
 							String name = parts[4].trim();
 							String email = parts[5].trim();
 							String date = parts[6].trim();
-						
+							
 							Publication newPub = new Publication(title, author, copyright);
-							library.addPublication(newPub);
+							newPub.checkOut(new Patron(name, email));
+							newPub.loadDate(date);
+							updatedLibrary.addPublication(newPub);
+							System.out.println("LOADED");
 							
 						}
 						else if(parts.length == 8){
@@ -117,7 +120,10 @@ public class LibraryManager{
 							int runtime = Integer.parseInt(parts[7].trim());
 							
 							Video newPub = new Video(title, author, copyright, runtime);
-							library.addPublication(newPub);
+							newPub.checkOut(new Patron(name, email));
+							newPub.loadDate(date);
+							updatedLibrary.addPublication(newPub);
+							System.out.println("LOADED");
 						}
 					}
 					catch(NumberFormatException e){
@@ -129,12 +135,14 @@ public class LibraryManager{
 					String email = parts[1].trim();
 					
 					Patron newPat = new Patron(name, email);
-					library.addPatron(newPat);
+					updatedLibrary.addPatron(newPat);
 				}
 			}
+			return updatedLibrary;
 		}
 		catch(IOException e){
 			e.printStackTrace();
+			return library;
 		}
 	}
 	

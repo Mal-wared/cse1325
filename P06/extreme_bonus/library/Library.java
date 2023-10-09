@@ -141,7 +141,7 @@ public class Library{
 	  */
 	public String toMenu(){
 		StringBuilder menu = new StringBuilder();
-		menu.append("\tMain Menu\n");
+		menu.append("\n\tMain Menu\n");
 		menu.append(String.format("\t*%s\n\n", name));
 		
 		menu.append("Publications\n");
