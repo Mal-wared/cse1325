@@ -1,7 +1,4 @@
-pop
-pop,pop,2000,checked in,
-pop,pop,2000,checked out,
-pop,pop,2023-10-23,
+stop
+sto,p,2000,checked out,add,me,2023-10-23,200,
 Patrons
-pop,pop,
-pop,pop,
+add,me,

@@ -38,7 +38,7 @@ public class Video extends Publication{
 	
 	public Video(BufferedReader br){
 		super(br);
-		try(br){
+		try{
 			String line = br.readLine().trim();
 			runtime = Duration.ofMinutes(Integer.parseInt(line));
 		}catch(IOException e){
@@ -48,13 +48,12 @@ public class Video extends Publication{
 	
 	@Override
 	public void save(BufferedWriter bw){
-		try(bw){
+		try{
 			super.save(bw);
-			bw.write(String.format("%\nd,", runtime));
+			bw.write(String.format("%d,", (int)runtime.toMinutes()));
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		
 	}
 	
 	/**

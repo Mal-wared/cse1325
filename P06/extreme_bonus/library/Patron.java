@@ -49,6 +49,14 @@ public class Patron{
 		}
 	}
 	
+	public void saveFromPublication(BufferedWriter bw){
+		try{
+			bw.write(String.format("%s,%s,", name, email));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	  * The patron instance converted to a string
 	  * 

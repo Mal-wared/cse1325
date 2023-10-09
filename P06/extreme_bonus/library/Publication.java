@@ -41,7 +41,7 @@ public class Publication{
 	}
 	
 	public Publication(BufferedReader br){
-		try(br){
+		try{
 			String line = br.readLine().trim();
 			String[] parts = line.split(",");
 			title = parts[0].trim();
@@ -66,7 +66,7 @@ public class Publication{
 			else 
 			{
 				bw.write(String.format("\n%s,%s,%d,checked out,", title, author, copyright));
-				loanedTo.save(bw);
+				loanedTo.saveFromPublication(bw);
 				bw.write(String.format("%s,", dueDate.toString()));
 			}
 		}catch(IOException e){
