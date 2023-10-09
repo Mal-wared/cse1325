@@ -1,8 +1,10 @@
 PlayerScoth
-Popcorn,Poppers,2004,checked out,SMOSH,smosh@business.com,2023-10-23,
+Popcorn,Poppers,2004,checked in,
 Some Video In 2019,PewDiePie,2019,checked out,PewDiePie,pewdiepie@gmail.com,2023-10-23,15,
 Popcorn Time,Kristal Meth,2004,checked in,
+Boomers,Boom Boom,2023,checked out,Nicholas Tran,nicktran@gmail.com,2023-10-23,10,
 Patrons
 PewDiePie,pewdiepie@gmail.com,
 SMOSH,smosh@business.com,
 Newest patron,Patron@patron.com,
+Nicholas Tran,nicktran@gmail.com,
