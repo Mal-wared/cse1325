@@ -24,6 +24,10 @@ public class Patron{
 		this.email = email;
 	}
 	
+	public void save(BufferedReader br){
+		br.write(String.format("%s,%s,%d\n"));
+	}
+	
 	/**
 	  * The patron instance converted to a string
 	  * 

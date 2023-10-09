@@ -126,9 +126,6 @@ public class Library{
 		try{
 			Scanner fileScanner = new Scanner(new File(fileName));
 			boolean patronsSectionReached = false;
-			if(fileScanner.hasNextLine()){
-				name = fileScanner.nextLine();
-			}
 			
 			while(fileScanner.hasNextLine()){
 				String line = fileScanner.nextLine().trim();

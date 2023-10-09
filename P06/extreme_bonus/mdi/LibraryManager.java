@@ -9,32 +9,11 @@ import library.Video;
 public class LibraryManager{
 	public static void main(String args[]){
 		Scanner scanner = new Scanner(System.in);
-		Library library = new Library();
 		
-		
-		System.out.println("Would you like to create or load a library?");
-		System.out.println("1) Create");
-		System.out.println("2) Load\n");
-		System.out.print("Enter a command from the list: ");
-		
-		String choiceInput = scanner.nextLine();
-		
-		
-		if(choiceInput.equals("1")){
-			System.out.println("\nWhat would you like to name your library? ");
-			String libraryName = scanner.nextLine();
-			library = new Library(libraryName);
-		}
-		else if(choiceInput.equals("2")){
-			loadLibrary(library, scanner);
-		}
-		else{
-			throw new IllegalArgumentException(String.format("Invalid command \"%s\"", choiceInput));
-		}
-		
-		
-		
-		
+		System.out.print("\nWhat would you like to name your library? ");
+		String libraryName = scanner.nextLine();
+		Library library = new Library(libraryName);
+	
 		boolean quit = false;
 		while(!quit){
 			System.out.println(library.toMenu());

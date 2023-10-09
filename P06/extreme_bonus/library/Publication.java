@@ -35,6 +35,31 @@ public class Publication{
 		this.copyright = copyright;
 	}
 	
+	public Publication(BufferedReader br){
+		String line = fileScanner.nextLine().trim();
+		String[] parts = line.split(",");
+		title = parts[0].trim();
+		author = parts[1].trim();
+		copyright = Integer.parseInt(parts[2].trim());
+		if(parts[3].equals("checked out")){
+			String[] patronInfo = line[4].split("()");
+			loanedTo = new Patron(patronInfo[0], patronInfo[1]);
+			dueDate = LocalDate.parse(parts[5].trim());
+		}
+			
+	}
+	
+	public void save(BufferedWriter bw){
+		if(dueDate == null){
+			br.write(String.format("%s,%s,%d,checked in,\n", title, author, copyright));
+		}
+		else
+		{
+			br.write(String.format("%s,%s,%d,checked out,%s,%s\n", title, author, copyright, loanedTo.toString(), dueDate.toString()));
+		}
+		
+	}
+	
 	/**
 	  * Checks out a publication to a patron and sets its due date 2 weeks from today
 	  * 
