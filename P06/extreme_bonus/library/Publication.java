@@ -85,7 +85,8 @@ public class Publication{
 		dueDate = LocalDate.now().plusDays(14);
 	}
 	
-	public void loadDate(String dueDateString){
+	public void automatedCheckOut(Patron patron, String dueDateString){
+		loanedTo = patron;
 		dueDate = LocalDate.parse(dueDateString);
 	}
 	

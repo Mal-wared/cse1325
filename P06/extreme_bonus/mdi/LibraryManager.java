@@ -49,14 +49,7 @@ public class LibraryManager{
 				library = openLibrary(library, scanner);
 			}
 			else if(cmdInput.equals("9")){
-				System.out.print("Enter File Name to Read: ");
-				String fileName = scanner.nextLine();
-			
-				try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))){
-					library.save(bw);
-				}catch(IOException e){
-					e.printStackTrace();
-				}
+				saveLibrary(library, scanner);
 			}
 			else if(cmdInput.equals("0")){
 				quit = true;
@@ -64,6 +57,17 @@ public class LibraryManager{
 			else{
 				System.out.println("Invalid input, try another command");
 			}
+		}
+	}
+	
+	public static void saveLibrary(Library library, Scanner scanner){
+		System.out.print("Enter File Name to Read: ");
+		String fileName = scanner.nextLine();
+	
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))){
+			library.save(bw);
+		}catch(IOException e){
+			e.printStackTrace();
 		}
 	}
 	
@@ -106,10 +110,7 @@ public class LibraryManager{
 							String date = parts[6].trim();
 							
 							Publication newPub = new Publication(title, author, copyright);
-							newPub.checkOut(new Patron(name, email));
-							newPub.loadDate(date);
-							updatedLibrary.addPublication(newPub);
-							System.out.println("LOADED");
+							newPub.automatedCheckOut(new Patron(name, email), date);
 							
 						}
 						else if(parts.length == 8){
@@ -120,10 +121,8 @@ public class LibraryManager{
 							int runtime = Integer.parseInt(parts[7].trim());
 							
 							Video newPub = new Video(title, author, copyright, runtime);
-							newPub.checkOut(new Patron(name, email));
-							newPub.loadDate(date);
+							newPub.automatedCheckOut(new Patron(name, email), date);
 							updatedLibrary.addPublication(newPub);
-							System.out.println("LOADED");
 						}
 					}
 					catch(NumberFormatException e){
