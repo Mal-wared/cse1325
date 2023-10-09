@@ -18,6 +18,10 @@ public class Library{
 	private ArrayList<Publication> publications = new ArrayList<>();
 	private ArrayList<Patron> patrons = new ArrayList<>();
 	
+	public Library(){
+	
+	}
+	
 	/**
 	  * Creates a Library instance
 	  * 
@@ -174,7 +178,7 @@ public class Library{
 	  */
 	public String toString(){
 		StringBuilder toString = new StringBuilder();
-		toString.append(String.format("%s\n\n", name));
+		toString.append(String.format("\n*%s\n\n", name));
 		for(int i = 0; i < publications.size(); i++){
 			toString.append(String.format("%d) %s", i, publications.get(i).toString()));
 		}

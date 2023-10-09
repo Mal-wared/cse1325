@@ -9,14 +9,13 @@ import library.Video;
 public class LibraryManager{
 	public static void main(String args[]){
 		Scanner scanner = new Scanner(System.in);
-		Library library;
+		Library library = new Library();
 		
-		StringBuilder createLibraryPrompt = new StringBuilder();
-		createLibraryPrompt.append("Would you like to create or load a library?\n");
-		createLibraryPrompt.append("1) Create\n");
-		createLibraryPrompt.append("2) Load\n\n");
-		createLibraryPrompt.append("Enter a command from the list: ");
-		System.out.println(createLibraryPrompt.toString());
+		
+		System.out.println("Would you like to create or load a library?");
+		System.out.println("1) Create");
+		System.out.println("2) Load\n");
+		System.out.print("Enter a command from the list: ");
 		
 		String choiceInput = scanner.nextLine();
 		
@@ -74,7 +73,7 @@ public class LibraryManager{
 		}
 	}
 	
-	public static void loadLibrary(Library library){
+	public static void loadLibrary(Library library, Scanner scanner){
 		System.out.print("Enter File Name to Read: ");
 		String fileName = scanner.nextLine();
 		library.readFile(fileName);
@@ -84,7 +83,7 @@ public class LibraryManager{
 	public static void addVideo(Library library, Scanner scanner){
 		System.out.print("Enter New Publication's Title: ");
 		String title = scanner.nextLine();
-		System.out.println("Enter New Publication's Author: ");
+		System.out.print("Enter New Publication's Author: ");
 		String author = scanner.nextLine();
 		System.out.print("Enter New Publication's Copyright: ");
 		int copyright = Integer.parseInt(scanner.nextLine());
