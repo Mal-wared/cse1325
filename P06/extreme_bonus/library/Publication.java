@@ -1,6 +1,11 @@
 package library;
 
 import java.time.LocalDate;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 /**
   * A library resource that can be checked out by a patron.
@@ -36,28 +41,37 @@ public class Publication{
 	}
 	
 	public Publication(BufferedReader br){
-		String line = fileScanner.nextLine().trim();
-		String[] parts = line.split(",");
-		title = parts[0].trim();
-		author = parts[1].trim();
-		copyright = Integer.parseInt(parts[2].trim());
-		if(parts[3].equals("checked out")){
-			String[] patronInfo = line[4].split("()");
-			loanedTo = new Patron(patronInfo[0], patronInfo[1]);
-			dueDate = LocalDate.parse(parts[5].trim());
+		try(br){
+			String line = br.readLine().trim();
+			String[] parts = line.split(",");
+			title = parts[0].trim();
+			author = parts[1].trim();
+			copyright = Integer.parseInt(parts[2].trim());
+			if(parts[3].equals("checked out")){
+				String[] patronInfo = parts[4].split("()");
+				loanedTo = new Patron(patronInfo[0], patronInfo[1]);
+				dueDate = LocalDate.parse(parts[5].trim());
+			}
+		}catch(IOException e){
+			e.printStackTrace();
 		}
-			
+		
 	}
 	
 	public void save(BufferedWriter bw){
-		if(dueDate == null){
-			br.write(String.format("%s,%s,%d,checked in,\n", title, author, copyright));
+		try{
+			if(dueDate == null){
+				bw.write(String.format("\n%s,%s,%d,checked in,", title, author, copyright));
+			}
+			else 
+			{
+				bw.write(String.format("\n%s,%s,%d,checked out,", title, author, copyright));
+				loanedTo.save(bw);
+				bw.write(String.format("%s,", dueDate.toString()));
+			}
+		}catch(IOException e){
+			e.printStackTrace();
 		}
-		else
-		{
-			br.write(String.format("%s,%s,%d,checked out,%s,%s\n", title, author, copyright, loanedTo.toString(), dueDate.toString()));
-		}
-		
 	}
 	
 	/**

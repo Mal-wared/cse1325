@@ -1,6 +1,11 @@
 package library;
 
 import java.time.Duration;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 /**
   * A library video that can be checked out by a patron.
@@ -29,6 +34,27 @@ public class Video extends Publication{
 			throw new InvalidRuntimeException(title, runtime);
 		}
 		this.runtime = Duration.ofMinutes(runtime);
+	}
+	
+	public Video(BufferedReader br){
+		super(br);
+		try(br){
+			String line = br.readLine().trim();
+			runtime = Duration.ofMinutes(Integer.parseInt(line));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void save(BufferedWriter bw){
+		try(bw){
+			super.save(bw);
+			bw.write(String.format("%\nd,", runtime));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**

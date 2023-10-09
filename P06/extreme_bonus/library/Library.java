@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 /**
   * Models a library containing various publications.
@@ -18,10 +23,6 @@ public class Library{
 	private ArrayList<Publication> publications = new ArrayList<>();
 	private ArrayList<Patron> patrons = new ArrayList<>();
 	
-	public Library(){
-	
-	}
-	
 	/**
 	  * Creates a Library instance
 	  * 
@@ -30,6 +31,51 @@ public class Library{
 	  */
 	public Library(String name){
 		this.name = name;
+	}
+	
+	public Library(BufferedReader br){
+		boolean patronsSectionReached = false;
+		try(br){
+			while(br.readLine() != null){
+				String line = br.readLine().trim();
+				String[] parts = line.split(",");
+				
+				if(parts[0].equals("Patrons")){
+					patronsSectionReached = true;
+				}
+				else if(!patronsSectionReached){
+					String title = parts[0].trim();
+					String author = parts[1].trim();
+					int copyright = Integer.parseInt(parts[2].trim());
+					try{
+						if(parts.length == 3){
+							Publication newPub = new Publication(title, author, copyright);
+							addPublication(newPub);
+						}
+						else if(parts.length == 4){
+							int runtime = Integer.parseInt(parts[3].trim());
+							
+							Video newPub = new Video(title, author, copyright, runtime);
+							addPublication(newPub);
+						}
+					}
+					catch(NumberFormatException e){
+						System.err.println("Error parsing copyright for line: " + line);
+					}
+				}
+				else{
+					String name = parts[0].trim();
+					String email = parts[1].trim();
+					
+					Patron newPat = new Patron(name, email);
+					addPatron(newPat);
+				
+				}
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
@@ -112,8 +158,25 @@ public class Library{
 		
 		menu.append("Files\n");
 		menu.append("8) Load\n");
+		menu.append("9) Save\n");
 		menu.append("0) Exit\n");
 		return menu.toString();
+	}
+	
+	public void save(BufferedWriter bw){
+		try{
+			bw.write(String.format("%s", name));
+			for(int i = 0; i < publications.size(); i++){
+				publications.get(i).save(bw);
+			}
+			bw.write("\nPatrons");
+			for(int i = 0; i < patrons.size(); i++){
+				patrons.get(i).save(bw);
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**

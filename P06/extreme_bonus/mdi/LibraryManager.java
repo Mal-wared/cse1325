@@ -5,9 +5,14 @@ import library.Library;
 import library.Publication;
 import library.Patron;
 import library.Video;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class LibraryManager{
-	public static void main(String args[]){
+	public static void main(String args[]) throws IOException{
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.print("\nWhat would you like to name your library? ");
@@ -41,7 +46,17 @@ public class LibraryManager{
 				addPatron(library, scanner);
 			} 
 			else if(cmdInput.equals("8")){
-				loadLibrary(library, scanner);
+				openLibrary(library, scanner);
+			}
+			else if(cmdInput.equals("9")){
+				System.out.print("Enter File Name to Read: ");
+				String fileName = scanner.nextLine();
+			
+				try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))){
+					library.save(bw);
+				}catch(IOException e){
+					e.printStackTrace();
+				}
 			}
 			else if(cmdInput.equals("0")){
 				quit = true;
@@ -52,11 +67,55 @@ public class LibraryManager{
 		}
 	}
 	
-	public static void loadLibrary(Library library, Scanner scanner){
+	public static void openLibrary(Library library, Scanner scanner){
 		System.out.print("Enter File Name to Read: ");
 		String fileName = scanner.nextLine();
 		library.readFile(fileName);
 		System.out.println(String.format("\nRead file \"%s\"\n", fileName));
+		
+		try{
+			name = fileScanner.nextLine().trim();
+			boolean patronsSectionReached = false;
+			
+			while(fileScanner.hasNextLine()){
+				String line = fileScanner.nextLine().trim();
+				String[] parts = line.split(",");
+				
+				if(parts[0].equals("Patrons")){
+					patronsSectionReached = true;
+				}
+				else if(!patronsSectionReached){
+					String title = parts[0].trim();
+					String author = parts[1].trim();
+					int copyright = Integer.parseInt(parts[2].trim());
+					try{
+						if(parts.length == 3){
+							Publication newPub = new Publication(title, author, copyright);
+							addPublication(newPub);
+						}
+						else if(parts.length == 4){
+							int runtime = Integer.parseInt(parts[3].trim());
+							
+							Video newPub = new Video(title, author, copyright, runtime);
+							addPublication(newPub);
+						}
+					}
+					catch(NumberFormatException e){
+						System.err.println("Error parsing copyright for line: " + line);
+					}
+				}
+				else{
+					String name = parts[0].trim();
+					String email = parts[1].trim();
+					
+					Patron newPat = new Patron(name, email);
+					addPatron(newPat);
+				}
+			}
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 	public static void addVideo(Library library, Scanner scanner){

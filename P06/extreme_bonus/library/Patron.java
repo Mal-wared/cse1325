@@ -1,5 +1,11 @@
 package library;
 
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 /**
   * A person authorized to check out a library resource.
   * 
@@ -24,8 +30,23 @@ public class Patron{
 		this.email = email;
 	}
 	
-	public void save(BufferedReader br){
-		br.write(String.format("%s,%s,%d\n"));
+	public Patron(BufferedReader br){
+		try{
+			String line = br.readLine().trim();
+			String[] parts = line.split(",");
+			name = parts[0];
+			email = parts[1];
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void save(BufferedWriter bw){
+		try{
+			bw.write(String.format("\n%s,%s,", name, email));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 	/**
