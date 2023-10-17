@@ -77,7 +77,7 @@ public class WordSearch {
     	int puzzlesToSolve = NUM_PUZZLES/NUM_THREADS;
     	int puzzlesIndex = 0;
     	List<Thread> threads = new ArrayList<>();
-    	for(int threadID = 0; threadID < NUM_THREADS-1; threadID++){
+    	for(int threadID = 0; threadID < NUM_THREADS; threadID++){
     		final int threadIDFinal = threadID;
     		final int puzzlesToSolveFinal = puzzlesToSolve;
     		final int puzzlesIndexFinal = puzzlesIndex;

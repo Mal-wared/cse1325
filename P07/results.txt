@@ -3,17 +3,24 @@ FULL CREDIT
 
 QUESTION 1: Why is String[] args changed to a LinkedList in WordSearch.main? (Hint: Examine the WordSearch constructor!)
 
-
+The String[] args is changed to a LinkedList so that the WordSearch constructor can handle the first individual string and remove it from a Linked List so that it can be separated like [-h] [-v] [#threads] [#puzzles] [puzzleFile] easily.
 
 
 QUESTION 2: How many puzzles did your machine need to solve with 1 thread to run for between 30 and 45 seconds: 
 
-
+It took 1000 puzzles for my machine to solve with 1 thread to run for between 30 and 45 seconds.
 
 
 QUESTION 3: Provide the output of 
 
     time java WordSearch n 1000 ../puzzle??.txt 
+		1000 puzzles with 1 threads
+		Thread 0: 0-999
+
+		real	0m35.438s
+		user	0m25.997s
+		sys	0m8.858s
+
 
 where n is 1 to 16 and 1000 is the number of puzzles specified in Question 2. NOTE: You can run all of these with a single bash command if you like (again, replace 1000 with your number of puzzles from Question 2):
 
