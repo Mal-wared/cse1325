@@ -110,22 +110,32 @@ public class WordSearch {
         
         for(int i=firstPuzzle; i<lastPuzzlePlusOne; ++i) {
         	Puzzle p = null;
-            synchronized (puzzles){
-            	if(i < puzzles.size()){
+        	
+            synchronized (puzzles) {
+            	if(i < puzzles.size()) {
             		p = puzzles.get(i);
             	}
             }
             
-            Solver solver = new Solver(p);
-            for(String word : p.getWords()) {
-                try {
-                    Solution s = solver.solve(word);
-                    if(s == null) System.err.println("#### Failed to solve " + p.name() + " for '" + word + "'");
-                    else solutions.add(s);
-                } catch (Exception e) {
-                    System.err.println("#### Exception solving " + p.name() 
-                        + " for " + word + ": " + e.getMessage());
-                }
+            if(p != null){
+		        Solver solver = new Solver(p);
+		        for(String word : p.getWords()) {
+		            try {
+		                Solution s = solver.solve(word);
+		                if(s == null) {
+		                	System.err.println("#### Failed to solve " + p.name() + " for '" + word + "'");
+		                }
+		                else{
+				            synchronized(solutions){
+				            	solutions.add(s);
+				            }
+		                }
+		            } 
+		            catch (Exception e) {
+		                System.err.println("#### Exception solving " + p.name() 
+		                    + " for " + word + ": " + e.getMessage());
+		            }
+		        }
             }
         }
         
