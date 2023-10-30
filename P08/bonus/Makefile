@@ -1,12 +1,9 @@
 CXXFLAGS += --std=c++17
 
-all: hello hello_all
+all: caps
 
-hello: hello.cpp
-	$(CXX) $(CXXFLAGS) hello.cpp -o hello
-
-hello_all: hello_all.cpp
-	$(CXX) $(CXXFLAGS) hello_all.cpp -o hello_all
+caps: caps.cpp
+	$(CXX) $(CXXFLAGS) caps.cpp -o caps
 
 clean:
-	-rm -f *.o *.gch *~ a.out hello hello_all
+	-rm -f *.o *.gch *~ a.out caps
