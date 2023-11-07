@@ -9,6 +9,7 @@ class Rectangle : public Shape{
     Rectangle(double height, double width);
     virtual std::string name() override;
     virtual double area() override;
+	virtual std::string to_string() override;
   private:
     double _height, _width;
 };

@@ -1,11 +1,19 @@
-#include "Shapes.h"
 #include <iostream>
+#include <vector>
+
 #include "Rectangle.h"
 #include "Circle.h"
 
 int main(){
-  Rectangle rectangle(3.0, 4.0);
+  std::vector<Shape*> shapes;
+  
+  Rectangle rectangle(3.0, 4.0); 
+  shapes.push_back(&rectangle); 
+  
   Circle circle(2.0);
-  std::cout << rectangle.to_string() << std::endl;
-  std::cout << circle.to_string() << std::endl;
+  shapes.push_back(&circle);
+  
+  for(const auto& shape : shapes){
+    std::cout << shape->to_string() << std::endl;
+  }
 }

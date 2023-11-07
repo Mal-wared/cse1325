@@ -10,3 +10,7 @@ std::string Rectangle::name(){
 double Rectangle::area(){
   return _height * _width;
 }
+
+std::string Rectangle::to_string(){
+  return name() + " with area " + std::to_string(area());
+}

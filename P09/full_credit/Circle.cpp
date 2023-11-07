@@ -10,3 +10,7 @@ std::string Circle::name(){
 double Circle::area(){
   return M_PI * std::pow(_radius, 2);
 }
+
+std::string Circle::to_string(){
+  return name() + " with area " + std::to_string(area());
+}
