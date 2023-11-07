@@ -5,9 +5,9 @@
 
 class Shape{
   public:
-    virtual std::string name() = 0;
-    virtual double area() = 0;
-    virtual std::string to_string() = 0;
+    std::string name();
+    double area();
+    virtual std::string to_string();
 };
 
 #endif
