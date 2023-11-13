@@ -8,7 +8,7 @@ int main(){
   std::vector<Shape*> shapes;
   
   Rectangle rectangle(3.0, 4.0); 
-  shapes.push_back(&rectangle); 
+  shapes.push_back(&rectangle);
   
   Circle circle(2.0);
   shapes.push_back(&circle);

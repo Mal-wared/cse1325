@@ -1,0 +1,17 @@
+#ifndef __CIRCLE_H
+#define __CIRCLE_H
+
+#include "Shape.h" 
+#include <cmath>
+
+class Circle : public Shape{
+  public:
+    Circle(double radius);
+    virtual std::string name() override;
+    virtual double area() override;
+	virtual std::string to_string() override;
+  private:
+    double _radius;
+};
+
+#endif
