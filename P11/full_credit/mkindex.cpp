@@ -6,9 +6,8 @@
 
 int main(int argc, char* argv[]){
     Index userIndex;
-
-    for(int i = 1; i < argc; i++){ 
-        std::ifstream file(argv[i]); 
+    for(int i = 1; i < argc; i++){
+        std::ifstream file(argv[i]);
         int lineNum = 1;
 
         std::string line;
